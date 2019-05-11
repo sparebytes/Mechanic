@@ -6,6 +6,7 @@ open System.IO
 open Fake.IO
 open Fake.Core
 open Fake.DotNet
+open Fake.DotNet.Nuget // Error FS0039: The namespace 'Nuget' is not defined.
 open Fake.Core.TargetOperators
 open Fake.IO.Globbing.Operators
 
@@ -15,7 +16,7 @@ let testProjectsPattern = "src/**/*Tests.fsproj"
 
 let srcProjects = !! projectsPattern -- testProjectsPattern
 let testProjects = !! testProjectsPattern
-let installDotNet = lazy DotNet.install DotNet.Release_2_1_4
+let installDotNet = lazy DotNet.install DotNet.Versions.Release_2_1_4
 
 // Read additional information from the release notes document
 let releaseNotes = File.ReadAllLines "RELEASE_NOTES.md"
@@ -28,7 +29,7 @@ let release = List.head releaseNotesData
 
 // Build target implementations
 
-let clean _ = !! "src/**/bin"++"**/obj" |> Shell.CleanDirs
+let clean _ = !! "src/**/bin"++"**/obj" |> Shell.cleanDirs
 
 let pokeVersion oldVersion newVersion project =
     if Xml.read false project "" "" "/Project/PropertyGroup/PackageVersion" |> Seq.exists ((=) oldVersion) then

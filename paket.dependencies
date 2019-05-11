@@ -15,7 +15,8 @@ github Microsoft/visualfsharp:Visual-Studio-2017-Version-15.4 src/fsharp/FSharp.
 group Build
   source https://www.nuget.org/api/v2/
 
-  nuget Fake.Core.Target prerelease
-  nuget Fake.DotNet.Cli prerelease
-  nuget Fake.Core.ReleaseNotes prerelease
-  nuget Fake.Core.Xml prerelease
+  nuget Fake.Core.Target
+  nuget Fake.DotNet.Cli
+  nuget Fake.DotNet.Nuget
+  nuget Fake.Core.ReleaseNotes
+  nuget Fake.Core.Xml
